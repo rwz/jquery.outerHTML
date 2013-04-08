@@ -7,8 +7,13 @@ You can also replace the whole element with some html by passing html string as 
 Getter
 ---
 
-`$('<div>').addClass('foo').text('bar').outerHTML(); # '<div class="foo">bar</div>'`
+```javascript
+$('<div>').addClass('foo').text('bar').outerHTML(); // => "<div class="foo">bar</div>"
+$('<a>', { href: '#lol', text: 'wut'}).outerHTML(); // => "<a href="#lol">wut</a>"
+```
 
 Setter
 ---
-`$('#my-element').outerHTML('<div class="foo">bar</div>');`
+```javascript
+$('#my-element').outerHTML('<div class="foo">bar</div>');
+```
