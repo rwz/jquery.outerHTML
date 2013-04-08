@@ -11,23 +11,19 @@
 (function ($) {
   'use strict';
 
-  var getter;
+  var jdiv = $('<div>'), div = jdiv.get(0);
 
-  if ('outerHTML' in $('<div>').get(0)) {
+  var getter = ('outerHTML' in div) ?
     // native support
-    getter = function(){ return this.get(0).outerHTML; }
-  } else {
+    function(){ return this.get(0).outerHTML; } :
+
     // no native support
-    getter = function(){
-      return $('<div>').append(this.first().clone()).html();
-    };
-  }
+    function(){ return jdiv.html(this.first().clone()).html(); };
 
   $.fn.outerHTML = function(){
-    if (arguments.length)
-      return this.replaceWith.apply(this, arguments);
-    else
-      return getter.call(this);
+    return arguments.length ?
+      this.replaceWith.apply(this, arguments) :
+      getter.call(this);
   };
 
 }(jQuery));
